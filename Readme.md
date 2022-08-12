@@ -1,7 +1,7 @@
 # Chitkara Exchange Portal
 
-## Development
-To start development, run the following commands in the root directory:
+## Contribution
+To start contributing, run the following commands in the root directory:
 
 ### Installing Dependencies
 `cd server`<br/>
