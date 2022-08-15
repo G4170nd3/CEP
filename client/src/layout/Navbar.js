@@ -17,7 +17,7 @@ function Navbar() {
   const [loading, setLoading] = useState(false)
 
   const navigate = useNavigate()
-  const { currentUser, userData } = useAuth()
+  const { currentUser, userData, logout } = useAuth()
 
 
   function solidifyNav(navState) {
@@ -83,10 +83,10 @@ function Navbar() {
         setNavState(false)
       }
     })
-    // if (currentUser) {
-    //   fetchNavData(currentUser)
-    // }
-  }, [screenWidth, currentUser])
+    if (userData) {
+      setLoading(false)
+    }
+  }, [screenWidth, currentUser, userData])
 
 
   return (
@@ -102,7 +102,7 @@ function Navbar() {
         <li className="nav-tab nav-tab-hover" onClick={() => { navigate("/") }}>Home</li>
         {/* <li className="nav-tab nav-tab-hover">Products</li> */}
         <li className="nav-tab nav-tab-hover">About</li> 
-        <li className="nav-tab-btn nav-tab-btn-hover">{currentUser ? loading ? <>Loading...</> : userData ? `${userData.firstName} ${userData.lastName}` : "" : "Login"}</li>
+        <li className="nav-tab-btn nav-tab-btn-hover" onClick={userData ? logout : <></>}>{currentUser ? loading ? <>Loading...</> : userData ? `${userData.name}` : "" : "Login"}</li>
       </ul>
     </div >
   )

@@ -13,6 +13,7 @@ export function useAuth() {
 export function AuthProvider({ children }) {
     const [currentUser, setCurrentUser] = useState()
     const [userData, setUserData] = useState()
+    const [userOrders, setUserOrders] = useState()
     const [inventory, setInventory] = useState({
         name: "Trimmer",
         metadata: {
@@ -58,8 +59,30 @@ export function AuthProvider({ children }) {
                 //success
                 console.log(data);
                 navigate("/dashboard")
-                Cookies.set("user", MD5(userInput.email))
+                Cookies.set("user", MD5(data.data[0].email + Date.now()), { expires: 1 })
                 setCurrentUser(Cookies.get("user"))
+                return;
+            } else if (data.statusCode == 502) {
+                //wrong password
+                console.log(data);
+                throw new Error(data.message);
+            }
+        } catch (error) {
+            throw error
+        }
+    }
+    async function logout() {
+        try {
+            // const { data } = await axios.post("/api/logout", {
+            //     userEmail: userData.email
+            // })
+            // console.log(data);
+            let data = { statusCode: 550 }
+            if (data.statusCode == 550) {
+                //success
+                navigate("/")
+                Cookies.remove("user")
+                setCurrentUser(null)
                 return;
             } else if (data.statusCode == 502) {
                 //wrong password
@@ -83,15 +106,82 @@ export function AuthProvider({ children }) {
                 branch: "CSE",
                 hostel: "Bose",
                 roomNum: 224,
-                verified: false,
+                verified: true,
                 complete: false
             })
         }, 5000);
     }
 
+    async function getUserOrders(uid) {
+        setTimeout(() => {
+            setUserOrders([
+                {
+                    orderId: "cuhp20xx",
+                    itemId: "123",
+                    borrowerId: "2011981xxxx",
+                    lenderId: "",
+                    transactionAmount: 10,
+                    dateOfTransaction: new Date().toLocaleString(),
+                    itemDetails: {
+                        itemName: "Trimmer",
+                        metadata: {
+                            brand: "Phillips",
+                            postCreated: "",
+                            lenderId: "201198xxxx",
+                        },
+                        desc: "Lorem ipsum",
+                        imgUrl: "",
+                        price: 10,
+                        estValue: 100,
+                    }
+                },
+                {
+                    orderId: "cuhp20xx",
+                    itemId: "123",
+                    borrowerId: "2011981xxxx",
+                    lenderId: "",
+                    transactionAmount: 15,
+                    dateOfTransaction: new Date().toLocaleString(),
+                    itemDetails: {
+                        itemName: "Kettle",
+                        metadata: {
+                            brand: "Omega",
+                            postCreated: "",
+                            lenderId: "201198xxxx",
+                        },
+                        desc: "Lorem ipsum",
+                        imgUrl: "",
+                        price: 15,
+                        estValue: 1000,
+                    }
+                },
+                {
+                    orderId: "cuhp20xx",
+                    itemId: "123",
+                    borrowerId: "2011981xxxx",
+                    lenderId: "",
+                    transactionAmount: 8,
+                    dateOfTransaction: new Date().toLocaleString(),
+                    itemDetails: {
+                        itemName: "Iron",
+                        metadata: {
+                            brand: "Bajaj",
+                            postCreated: "",
+                            lenderId: "201198xxxx",
+                        },
+                        desc: "Lorem ipsum",
+                        imgUrl: "",
+                        price: 8,
+                        estValue: 100,
+                    }
+                }
+            ])
+        }, 5000);
+    }
+
     useEffect(() => {
         setCurrentUser(Cookies.get("user"))
-    }, [])
+    }, [currentUser])
 
 
     const value = {
@@ -100,7 +190,10 @@ export function AuthProvider({ children }) {
         userNotifications,
         login,
         signup,
-        getUserData
+        logout,
+        getUserData,
+        userOrders,
+        getUserOrders
     }
     return (
         <AuthContext.Provider value={value}>

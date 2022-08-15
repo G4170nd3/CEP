@@ -1,10 +1,10 @@
 :root {
-  --c1: #FF416C;
-  --c2: #3c97bf;
+  --c1: #111;
+  --c2: #2f2f2f;
   --c3: #ffffff;
   --error-text: #c62828;
   --error-background: #fbe9e7;
-  --gradient: linear-gradient(to right, #FF4B2B, #FF416C);
+  --gradient: linear-gradient(to right, #d99e38, #ffcb74);
 }
 
 body {
