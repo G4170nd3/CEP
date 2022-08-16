@@ -41,9 +41,9 @@
 
 .auth-user-gateway-container button {
 	border-radius: 20px;
-	border: 1px solid #FF4B2B;
-	background-color: #FF4B2B;
-	color: #FFFFFF;
+	border: 1px solid #ffcb74;
+	background-color: #d99e38;
+	color: var(--c2);
 	font-size: 12px;
 	font-weight: bold;
 	padding: 12px 45px;
@@ -63,7 +63,7 @@
 
 .auth-user-gateway-container button.ghost {
 	background-color: transparent;
-	border-color: #FFFFFF;
+	border-color: var(--c2);
 }
 
 .auth-user-gateway-container form {
@@ -158,11 +158,10 @@
 .auth-user-gateway-container .overlay {
 	background: #FF416C;
 	background: var(--gradient);
-	background: var(--gradient);
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: 0 0;
-	color: #FFFFFF;
+	color: var(--c2);
 	position: relative;
 	left: -100%;
 	height: 100%;

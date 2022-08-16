@@ -8,6 +8,11 @@
     margin: 10px;
 }
 
+.center-scr {
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+
 .profile-section {
     width: calc(100% - 40px);
     margin-bottom: 40px;
@@ -83,9 +88,9 @@
     background-color: var(--c3);
     width: calc(100% - 30px);
     min-width: 300px;
-    height: 300px;
     margin-bottom: 20px;
     padding: 15px;
+    border-radius: 12px;
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 }
 
@@ -128,10 +133,10 @@
     height: 100%;
     border-radius: 12px;
     background: linear-gradient(to left,
-            hsl(340deg 100% 16%) 0%,
-            hsl(340deg 100% 32%) 8%,
-            hsl(340deg 100% 32%) 92%,
-            hsl(340deg 100% 16%) 100%);
+            hsl(38, 100%, 55%) 0%,
+            hsl(38, 100%, 50%) 8%,
+            hsl(38, 100%, 50%) 92%,
+            hsl(38, 100%, 55%) 100%);
 }
 
 .button-82-front {
@@ -140,8 +145,8 @@
     padding: 12px 27px;
     border-radius: 12px;
     font-size: 1.1rem;
-    color: white;
-    background: hsl(345deg 100% 47%);
+    color: var(--c1);
+    background: hsl(38, 100%, 73%);
     will-change: transform;
     transform: translateY(-4px);
     transition:
