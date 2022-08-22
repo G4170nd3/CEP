@@ -29,7 +29,7 @@ router.post("/register", (request, response) => {
                                 [result1.length + 1, name, password, email],
                                 (err) => {
                                     if (err) console.log(err);
-                                    else response.send({ statusCode: 500, message: "Register Succesful" });
+                                    else response.send({ statusCode: 500, message: "Register Succesful", data: result1 });
                                 });
 
                         });

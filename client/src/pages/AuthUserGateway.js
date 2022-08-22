@@ -41,9 +41,8 @@ function Login() {
         }
         try {
             await signup(userInput)
-            navigate("/dashboard")
         } catch (error) {
-            document.getElementById("message").innerHTML = error.message
+            console.log(error.message)
         }
     }
 

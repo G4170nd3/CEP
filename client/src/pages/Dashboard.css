@@ -1,6 +1,5 @@
 .dashboard-container {
     background-color: #f0f0f1;
-    padding: 80px;
 }
 
 .header {
@@ -11,19 +10,6 @@
 .center-scr {
     margin-left: 50%;
     transform: translateX(-50%);
-}
-
-.profile-section {
-    width: calc(100% - 40px);
-    margin-bottom: 40px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    /* align-items: center; */
-    justify-content: space-around;
-    min-width: 280px;
-    padding: 20px;
-    /* box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset; */
 }
 
 .verify-now {
@@ -37,58 +23,12 @@
     border: 2px solid var(--c1);
 }
 
-.user-details {
-    width: fit-content;
-    max-width: 80%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-    min-width: 280px;
-    padding: 20px;
-    transform: rotate(-1.5deg);
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-}
-
-.paper-clip {
-    position: absolute;
-    width: 100px;
-}
-
-.user-avatar {
-    min-width: 100px;
-    min-height: 100px;
-    background-color: #f0f0f1;
-    margin: 20px 50px;
-    z-index: 900;
-}
-
-.user-avatar img {
-    width: 100%;
-    height: 100%;
-    border: solid 7px #41403E;
-    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
-}
-
-.user-info {
-    /* background-color: aliceblue; */
-}
-
-.user-profile-actions {
-    width: 20%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-width: 280px;
-}
-
 .action-container {
     background-color: var(--c3);
-    width: calc(100% - 30px);
+    width: calc(100% - 190px);
     min-width: 300px;
-    margin-bottom: 20px;
+    min-height: 200px;
+    margin: 0px 80px;
     padding: 15px;
     border-radius: 12px;
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
@@ -157,6 +97,8 @@
     .button-82-front {
         font-size: 1.25rem;
         padding: 12px 42px;
+        font-weight: 550;
+        color: var(--c1);
     }
 }
 
