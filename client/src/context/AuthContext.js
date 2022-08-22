@@ -38,6 +38,9 @@ export function AuthProvider({ children }) {
             if (data.statusCode == 500) {
                 //success
                 console.log(data);
+                navigate("/dashboard")
+                Cookies.set("user", MD5(data.data[0].email + Date.now()), { expires: 1 })
+                setCurrentUser(Cookies.get("user"))
                 return;
             } else if (data.statusCode == 501) {
                 //email already exists
@@ -94,12 +97,42 @@ export function AuthProvider({ children }) {
         }
     }
 
+    async function updateProfie(input) {
+        const profile = {
+            username: userData.username,
+            email: userData.email,
+            name: userData.name,
+            rollNum: input.rollNum,
+            campus: input.branch,
+            batch: input.batch,
+            branch: input.branch,
+            hostel: input.hostel,
+            roomNum: input.roomNum
+        }
+        try {
+            const { data } = await axios.post("/api/user/update", profile)
+            console.log(data);
+            if (data.statusCode == 550) {
+                //success
+                console.log(data);
+                navigate("/dashboard")
+                return;
+            } else if (data.statusCode == 502) {
+                //wrong password
+                console.log(data);
+                throw new Error(data.message);
+            }
+        } catch (error) {
+            throw error
+        }
+    }
+
     async function getUserData() {
         setTimeout(() => {
             setUserData({
                 username: "akarsh1278.be20",
                 email: "akarsh1278.be20@chitkarauniversity.edu.in",
-                name: "Akarsh Tripathi",
+                name: "AKARSH TRIPATHI",
                 rollNum: 2011981278,
                 campus: "HP",
                 batch: 2020,
@@ -109,7 +142,7 @@ export function AuthProvider({ children }) {
                 verified: true,
                 complete: false
             })
-        }, 5000);
+        }, 1000);
     }
 
     async function getUserOrders(uid) {
@@ -193,7 +226,8 @@ export function AuthProvider({ children }) {
         logout,
         getUserData,
         userOrders,
-        getUserOrders
+        getUserOrders,
+        updateProfie
     }
     return (
         <AuthContext.Provider value={value}>

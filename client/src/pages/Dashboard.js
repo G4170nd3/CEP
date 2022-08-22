@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import './Dashboard.css'
 import ProfileSection from '../layout/ProfileSection'
-import ViewOrders from './ViewOrders'
 import Lend from './Lend'
 import Borrow from './Borrow'
 import ContentLoader from "react-content-loader"
@@ -22,7 +21,7 @@ function Dashboard() {
     useEffect(() => {
         const pathName = window.location.pathname
         if (pathName === "/dashboard")
-            setUserAction("vieworders")
+            setUserAction("lend")
         else
             setUserAction(pathName.split("/")[1])
     }, [userAction, window.location.pathname])
@@ -64,9 +63,6 @@ function Dashboard() {
 
                 }
                 <div className="action-container">
-                    {userAction === "vieworders" ?
-                        <ViewOrders userData={userData} />
-                        : <></>}
                     {userAction === "lend" ?
                         <Lend userData={userData} />
                         : <></>}

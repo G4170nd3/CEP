@@ -102,7 +102,7 @@ function Navbar() {
         <li className="nav-tab nav-tab-hover" onClick={() => { navigate("/") }}>Home</li>
         {/* <li className="nav-tab nav-tab-hover">Products</li> */}
         <li className="nav-tab nav-tab-hover">About</li> 
-        <li className="nav-tab-btn nav-tab-btn-hover" onClick={userData ? logout : <></>}>{currentUser ? loading ? <>Loading...</> : userData ? `${userData.name}` : "" : "Login"}</li>
+        <li className="nav-tab-btn nav-tab-btn-hover" onClick={userData ? logout : ()=>{}}>{currentUser ? loading ? <>Loading...</> : userData ? `${userData.name}` : "" : "Login"}</li>
       </ul>
     </div >
   )
