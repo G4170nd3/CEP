@@ -87,12 +87,13 @@
 
 .modal {
     position: absolute;
-    width: 100%;
+    width: calc(100% - 100px);
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: -10px;
+    margin-top: -80px;
+    padding: 50px;
 }
 
 .modal-overlay {
@@ -109,6 +110,7 @@
     background-color: #fff;
     z-index: 998;
     padding: 10px;
+    margin: 20px;
 }
 
 .close-modal {
@@ -139,4 +141,24 @@
 
 input[type="submit"] {
     cursor: pointer;
+}
+
+input[type="checkbox"] {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+}
+
+button:disabled {
+    cursor: not-allowed;
+}
+
+.btn-send-otp {
+    width: 100px;
+}
+
+.btn-send-otp  span {
+    font-size: medium;
+    padding-left: 0px;
+    padding-right: 0px;
 }

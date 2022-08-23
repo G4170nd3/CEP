@@ -35,7 +35,7 @@ function Dashboard() {
                 <div className="header">
                     {/* <h1>DASHBOARD</h1> */}
                 </div>
-                {userData && !userData.verified && <div className="verify-now">Verify your email to start using the portal. Click here to verify.</div>}
+                {userData && !userData.isVerified && <div className="verify-now">Verify your email to start using the portal. Click here to verify.</div>}
                 {userData ? <ProfileSection userData={userData} />
                     :
                     <ContentLoader

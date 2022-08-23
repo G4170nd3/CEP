@@ -139,8 +139,8 @@ export function AuthProvider({ children }) {
                 branch: "CSE",
                 hostel: "Bose",
                 roomNum: 224,
-                verified: true,
-                complete: false
+                isVerified: false,
+                isComplete: false
             })
         }, 1000);
     }
