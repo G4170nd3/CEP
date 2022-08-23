@@ -12,6 +12,8 @@ function ProfileSection(props) {
     const navigate = useNavigate()
     const [editProfile, toggleEditProfile] = useState(false)
     const [editProfileInput, setEditProfileInput] = useState()
+    const [disableOtpReq, setDisableOtpReq] = useState(false)
+    const [isDayScholar, setDayScholar] = useState(false)
     const { updateProfie } = useAuth()
 
     useEffect(() => {
@@ -36,6 +38,11 @@ function ProfileSection(props) {
             console.error(error);
             alert(error)
         }
+    }
+
+    async function handleOtpRequest(e) {
+        e.preventDefault()
+        setDisableOtpReq(true)
     }
 
     const handleEditProfileInput = (event) => {
@@ -117,21 +124,51 @@ function ProfileSection(props) {
                                             </td>
                                         </tr>
                                         <tr>
+                                            <td colSpan={2}>
+                                                <label htmlFor="isDayScholar">Check this box if you are a day scholar</label>&nbsp;
+                                                <input type="checkbox" name='isDayScholar' onChange={(e) => {handleEditProfileInput(e); setDayScholar(!isDayScholar)}} required={true} />
+                                            </td>
+                                        </tr>
+                                        {!isDayScholar && <tr>
                                             <td>
                                                 <label htmlFor="hostel">Hostel: </label>
                                             </td>
                                             <td>
                                                 <input type="text" name='hostel' onChange={handleEditProfileInput} required={true} />
                                             </td>
-                                        </tr>
-                                        <tr>
+                                        </tr>}
+                                        {!isDayScholar && <tr>
                                             <td>
                                                 <label htmlFor="roomNum">Room Number: </label>
                                             </td>
                                             <td>
                                                 <input type="number" name='roomNum' onChange={handleEditProfileInput} required={true} />
                                             </td>
-                                        </tr>
+                                        </tr>}
+                                        {!props.userData.isVerified &&
+                                            <tr>
+                                                <td colSpan={2}>
+                                                    Verify your email
+                                                    <button className="btn-send-otp button-82-pushable" role="button" onClick={handleOtpRequest} disabled={disableOtpReq}>
+                                                        <span className="button-82-shadow"></span>
+                                                        <span className="button-82-edge"></span>
+                                                        <span className="button-82-front text">
+                                                            Send OTP
+                                                        </span>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        }
+                                        {!props.userData.isVerified &&
+                                            <tr>
+                                                <td>
+                                                    <label htmlFor="otp">OTP: </label>
+                                                </td>
+                                                <td>
+                                                    <input type="number" name='otp' onChange={handleEditProfileInput} required={true} />
+                                                </td>
+                                            </tr>
+                                        }
                                         <tr>
                                             <td colSpan={2}>
                                                 <button className="button-82-pushable" role="button" type='submit' form='ep-form'>

@@ -14,7 +14,7 @@
 
 .verify-now {
     background-color: var(--error-background);
-    width: calc(100% - 20px);
+    width: calc(100% - 30px);
     color: var(--error-text);
     text-align: center;
     padding: 10px;
