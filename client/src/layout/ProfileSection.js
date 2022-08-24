@@ -126,7 +126,7 @@ function ProfileSection(props) {
                                         <tr>
                                             <td colSpan={2}>
                                                 <label htmlFor="isDayScholar">Check this box if you are a day scholar</label>&nbsp;
-                                                <input type="checkbox" name='isDayScholar' onChange={(e) => {handleEditProfileInput(e); setDayScholar(!isDayScholar)}} required={true} />
+                                                <input type="checkbox" name='isDayScholar' onChange={(e) => { handleEditProfileInput(e); setDayScholar(!isDayScholar) }} required={true} />
                                             </td>
                                         </tr>
                                         {!isDayScholar && <tr>
@@ -187,6 +187,39 @@ function ProfileSection(props) {
                     </div>
                 </div>
             }
+            {props.verifyModal &&
+                !props.userData.isVerified &&
+                <div className='modal'>
+                    <div className="modal-overlay"></div>
+                    <div className="modal-body">
+                        <div className="close-modal" onClick={() => props.verifyModalToggle(false)}>X</div>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td colSpan={2}>
+                                        Verify your email
+                                        <button className="btn-send-otp button-82-pushable" role="button" onClick={handleOtpRequest} disabled={disableOtpReq}>
+                                            <span className="button-82-shadow"></span>
+                                            <span className="button-82-edge"></span>
+                                            <span className="button-82-front text">
+                                                Send OTP
+                                            </span>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label htmlFor="otp">OTP: </label>
+                                    </td>
+                                    <td>
+                                        <input type="number" name='otp' onChange={handleEditProfileInput} required={true} />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            }
             <div className="profile-section">
                 <div className="user-details paper white">
 
@@ -227,7 +260,7 @@ function ProfileSection(props) {
                     </button>
                 </div>
             </div>
-        </React.Fragment>
+        </React.Fragment >
     )
 }
 
