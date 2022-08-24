@@ -10,6 +10,7 @@ import ContentLoader from "react-content-loader"
 
 function Dashboard() {
     const { userData, getUserData } = useAuth()
+    const [verifyModal, toggleVerifyModal] = useState(false)
     const [userAction, setUserAction] = useState()
     const navigate = useNavigate()
 
@@ -35,8 +36,8 @@ function Dashboard() {
                 <div className="header">
                     {/* <h1>DASHBOARD</h1> */}
                 </div>
-                {userData && !userData.isVerified && <div className="verify-now">Verify your email to start using the portal. Click here to verify.</div>}
-                {userData ? <ProfileSection userData={userData} />
+                {userData && !userData.isVerified && <div className="verify-now" onClick={() => toggleVerifyModal(!verifyModal)}>Verify your email to start using the portal. Click here to verify.</div>}
+                {userData ? <ProfileSection userData={userData} verifyModal={verifyModal} verifyModalToggle={toggleVerifyModal} />
                     :
                     <ContentLoader
                         width={700}
