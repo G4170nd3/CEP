@@ -4,8 +4,10 @@ import '../pages/Dashboard.css'
 import './ProfileSection.css'
 import pencilIcon from '../assets/icons/pencil.png'
 import MD5 from 'crypto-js/md5'
+// import handleOtp from '../context/handleOtp'
 import { Helmet } from 'react-helmet'
 import { useAuth } from '../context/AuthContext'
+// import verifyEmail from '../context/verifyEmail'
 
 function ProfileSection(props) {
 
@@ -15,9 +17,10 @@ function ProfileSection(props) {
     const [disableOtpReq, setDisableOtpReq] = useState(false)
     const [isDayScholar, setDayScholar] = useState(false)
     const { updateProfie } = useAuth()
+    //props.userData.dpUrl = `https://www.gravatar.com/avatar/${MD5(props.userData.email)}?d=wavatar&s=1000&r=x`;
 
     useEffect(() => {
-        props.userData.dpUrl = `https://www.gravatar.com/avatar/${MD5(props.userData.email)}?d=retro&s=1000&r=x`
+        props.userData.dpUrl = `https://www.gravatar.com/avatar/${MD5(props.userData.email)}?d=wavatar&s=1000&r=x`
         console.log(props.userData.dpUrl);
     }, [])
 
@@ -40,7 +43,7 @@ function ProfileSection(props) {
         }
     }
 
-    async function handleOtpRequest(e) {
+    async function handleOtpRequest(e) {    //gotta add the onclick send otp
         e.preventDefault()
         setDisableOtpReq(true)
     }
@@ -225,12 +228,12 @@ function ProfileSection(props) {
 
                     <div className="top-tape"></div>
                     <div className="user-avatar">
-                        {props.userData && <img src="https://www.gravatar.com/avatar/242600846a716588f455fbb330e2d035?s=1000&d=retro&r=x" />}
+                        {props.userData && <img src='https://www.gravatar.com/avatar/242600846a716588f455fbb330e2d035?d=wavatar&s=1000&r=x' />}
                     </div>
                     <div className="user-info">
                         <h2>{props.userData.name}</h2>
                         <div className='user-enrollment'>
-                            <div id="batch">University ID: {props.userData && props.userData.rollNum}</div>
+                            {props.userData && props.userData.rollNum && <div id="batch">University ID: {props.userData.rollNum}</div>}
                             {props.userData && props.userData.campus && <div id="batch">Campus: {props.userData.campus}</div>}
                             {props.userData && props.userData.branch && <div id="batch">Branch: {props.userData.branch}</div>}
                             {props.userData && props.userData.batch && <div id="batch">Batch: {props.userData.batch}</div>}

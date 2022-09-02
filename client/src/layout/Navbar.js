@@ -95,7 +95,7 @@ function Navbar() {
         <img src={navState ? hamburgerDark : hamburger} alt="" id="hamburger" onClick={openMobileMenu} />
       </div>
       <div className="nav-title">
-        <h1 onClick={() => { navigate("/") }}>Chitkara Exchange Portal</h1><div className='campus-subtext'>{userData && userData.campus}</div>
+        <h1 onClick={() => { navigate("/") }}>Chitkara Exchange Portal</h1>{userData && userData.campus && <div className='campus-subtext'>{userData && userData.campus}</div>}
       </div>
       <ul className={screenWidth > 665 ? "nav-tabs-container" : "nav-tabs-container-mobile"}>
         <li id="close-mobile-menu" onClick={closeMobileMenu}>X</li>

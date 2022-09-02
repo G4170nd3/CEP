@@ -133,12 +133,12 @@ export function AuthProvider({ children }) {
                 username: "akarsh1278.be20",
                 email: "akarsh1278.be20@chitkarauniversity.edu.in",
                 name: "AKARSH TRIPATHI",
-                rollNum: 2011981278,
-                campus: "HP",
-                batch: 2020,
-                branch: "CSE",
-                hostel: "Bose",
-                roomNum: 224,
+                rollNum: null,
+                campus: null,
+                batch: null,
+                branch: null,
+                hostel: null,
+                roomNum: null,
                 isVerified: false,
                 isComplete: false
             })
