@@ -6,6 +6,8 @@ import './Dashboard.css'
 import ProfileSection from '../layout/ProfileSection'
 import Lend from './Lend'
 import Borrow from './Borrow'
+// import verifyEmail from '../context/verifyEmail'
+// import handleOtp from '../context/handleOtp'
 import ContentLoader from "react-content-loader"
 
 function Dashboard() {
