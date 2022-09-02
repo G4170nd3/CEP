@@ -251,13 +251,6 @@ function ProfileSection(props) {
                             LEND
                         </span>
                     </button>
-                    <button className="button-82-pushable" role="button" onClick={borrow}>
-                        <span className="button-82-shadow"></span>
-                        <span className="button-82-edge"></span>
-                        <span className="button-82-front text">
-                            BORROW
-                        </span>
-                    </button>
                 </div>
             </div>
         </React.Fragment >
