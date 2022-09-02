@@ -5,9 +5,6 @@ import { useAuth } from '../context/AuthContext'
 import './Dashboard.css'
 import ProfileSection from '../layout/ProfileSection'
 import Lend from './Lend'
-import Borrow from './Borrow'
-// import verifyEmail from '../context/verifyEmail'
-// import handleOtp from '../context/handleOtp'
 import ContentLoader from "react-content-loader"
 
 function Dashboard() {
@@ -69,10 +66,6 @@ function Dashboard() {
                     {userAction === "lend" ?
                         <Lend userData={userData} />
                         : <></>}
-                    {userAction === "borrow" ?
-                        <Borrow userData={userData} />
-                        : <></>
-                    }
                 </div>
             </div>
         </React.Fragment>
