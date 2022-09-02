@@ -4,6 +4,7 @@ const bcrypt = require("bcrypt")
 const nodemailer = require("nodemailer");
 
 const router = Router();
+//fuck you akarsh
 
 const db = mysql.createConnection({
     user: "root",
