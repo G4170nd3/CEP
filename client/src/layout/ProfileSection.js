@@ -20,7 +20,7 @@ function ProfileSection(props) {
     //props.userData.dpUrl = `https://www.gravatar.com/avatar/${MD5(props.userData.email)}?d=wavatar&s=1000&r=x`;
 
     useEffect(() => {
-        props.userData.dpUrl = `https://www.gravatar.com/avatar/${MD5(props.userData.email)}?d=wavatar&s=1000&r=x`
+        props.userData.dpUrl = `https://www.gravatar.com/avatar/${MD5(props.userData.email)}?d=identicon&s=10&r=x`
         console.log(props.userData.dpUrl);
     }, [])
 
@@ -228,7 +228,7 @@ function ProfileSection(props) {
 
                     <div className="top-tape"></div>
                     <div className="user-avatar">
-                        {props.userData && <img src='https://www.gravatar.com/avatar/242600846a716588f455fbb330e2d035?d=wavatar&s=1000&r=x' />}
+                        {props.userData && <img src='https://www.gravatar.com/avatar/242600846a716588f455fbb330e2d035?d=identicon&s=1000&r=x' />}
                     </div>
                     <div className="user-info">
                         <h2>{props.userData.name}</h2>
@@ -251,14 +251,14 @@ function ProfileSection(props) {
                         <span className="button-82-shadow"></span>
                         <span className="button-82-edge"></span>
                         <span className="button-82-front text">
-                            LEND
+                            Post Ad
                         </span>
                     </button>
-                    <button className="button-82-pushable" role="button" onClick={borrow}>
+                    <button className="button-82-pushable" role="button" onClick={lend}>
                         <span className="button-82-shadow"></span>
                         <span className="button-82-edge"></span>
                         <span className="button-82-front text">
-                            BORROW
+                            Create Ad
                         </span>
                     </button>
                 </div>

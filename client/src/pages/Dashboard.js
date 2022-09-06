@@ -4,10 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import './Dashboard.css'
 import ProfileSection from '../layout/ProfileSection'
-import Lend from './Lend'
-import Borrow from './Borrow'
-// import verifyEmail from '../context/verifyEmail'
-// import handleOtp from '../context/handleOtp'
+import CreateAd from './CreateAd'
 import ContentLoader from "react-content-loader"
 
 function Dashboard() {
@@ -67,12 +64,8 @@ function Dashboard() {
                 }
                 <div className="action-container">
                     {userAction === "lend" ?
-                        <Lend userData={userData} />
+                        <CreateAd userData={userData} />
                         : <></>}
-                    {userAction === "borrow" ?
-                        <Borrow userData={userData} />
-                        : <></>
-                    }
                 </div>
             </div>
         </React.Fragment>
