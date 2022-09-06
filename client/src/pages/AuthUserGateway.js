@@ -9,6 +9,7 @@ function Login() {
     const [userInput, setUserInput] = useState({})
     const navigate = useNavigate()
     const { currentUser, login, signup } = useAuth()
+    const [loading, setLoading] = useState(false)
 
     /*
     userInput = {
@@ -26,6 +27,7 @@ function Login() {
     const [pageState, setPageState] = useState("login")
 
     const handleSignup = async (e) => {
+        setLoading(true)
         e.preventDefault()
         if (userInput.name == "" || userInput.name == undefined) {
             alert("Invalid name")
@@ -41,12 +43,15 @@ function Login() {
         }
         try {
             await signup(userInput)
+            setLoading(false)
         } catch (error) {
+            setLoading(false)
             console.log(error.message)
         }
     }
 
     const handleLogin = async (e) => {
+        setLoading(true)
         e.preventDefault()
         if (userInput.email == "" || userInput.email == undefined) {
             alert("Invalid email")
@@ -59,7 +64,9 @@ function Login() {
         // console.log(userInput.email, userInput.password)
         try {
             await login(userInput)
+            setLoading(false)
         } catch (error) {
+            setLoading(false)
             document.getElementById("message").innerHTML = error.message
         }
     }
@@ -98,7 +105,7 @@ function Login() {
                             <input type="email" name='email' id='email-signup' placeholder="Email" onChange={handleInput} />
                             <input type="password" name='password' id='password-signup' placeholder="Password" onChange={handleInput} />
                             <p className='mobile-gateway-mode-switch' onClick={() => { document.getElementById('container').classList.remove("right-panel-active"); setPageState("login"); setUserInput({}) }}>Already registered? Login</p>
-                            <button>Sign Up</button>
+                            <button disabled={loading}>{loading? "Loading...":"Sign Up"}</button>
                         </form>
                     </div>
                     <div className="form-container sign-in-container">
@@ -109,7 +116,7 @@ function Login() {
                             <input type="password" name='password' id='password-signin' placeholder="Password" onChange={handleInput} />
                             {/* <a href="#">Forgot your password?</a> */}
                             <p className='mobile-gateway-mode-switch' onClick={() => { document.getElementById('container').classList.add("right-panel-active"); setPageState("signup"); setUserInput({}) }}>Not registered? Signup</p>
-                            <button>Sign In</button>
+                            <button disabled={loading}>{loading? "Loading...":"Sign In"}</button>
                         </form>
                     </div>
                     <div className="overlay-container">
