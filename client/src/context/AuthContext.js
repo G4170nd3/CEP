@@ -13,7 +13,6 @@ export function useAuth() {
 export function AuthProvider({ children }) {
     const [currentUser, setCurrentUser] = useState()
     const [userData, setUserData] = useState()
-    const [userOrders, setUserOrders] = useState()
     const [inventory, setInventory] = useState({
         name: "Trimmer",
         metadata: {
@@ -41,7 +40,7 @@ export function AuthProvider({ children }) {
                 navigate("/dashboard")
                 Cookies.set("user", MD5(data.data[0].email + Date.now()), { expires: 1 })
                 setCurrentUser(Cookies.get("user"))
-                return;
+                return
             } else if (data.statusCode == 501) {
                 //email already exists
                 throw new Error(data.message);
@@ -64,6 +63,7 @@ export function AuthProvider({ children }) {
                 navigate("/dashboard")
                 Cookies.set("user", MD5(data.data[0].email + Date.now()), { expires: 1 })
                 setCurrentUser(Cookies.get("user"))
+                getUserData(data.data[0].email)
                 return;
             } else if (data.statusCode == 502) {
                 //wrong password
@@ -74,6 +74,7 @@ export function AuthProvider({ children }) {
             throw error
         }
     }
+
     async function logout() {
         try {
             // const { data } = await axios.post("/api/logout", {
@@ -127,89 +128,22 @@ export function AuthProvider({ children }) {
         }
     }
 
-    async function getUserData() {
-        setTimeout(() => {
-            setUserData({
-                username: "akarsh1278.be20",
-                email: "akarsh1278.be20@chitkarauniversity.edu.in",
-                name: "AKARSH TRIPATHI",
-                rollNum: null,
-                campus: null,
-                batch: null,
-                branch: null,
-                hostel: null,
-                roomNum: null,
-                isVerified: false,
-                isComplete: false
-            })
-        }, 1000);
+    async function getUserData(email) {
+        try {
+            const { data } = await axios.post("/user/details", { userEmail: email })
+            setUserData(data)
+        } catch (error) {
+            console.error(error);
+        }
     }
 
-    async function getUserOrders(uid) {
-        setTimeout(() => {
-            setUserOrders([
-                {
-                    orderId: "cuhp20xx",
-                    itemId: "123",
-                    borrowerId: "2011981xxxx",
-                    lenderId: "",
-                    transactionAmount: 10,
-                    dateOfTransaction: new Date().toLocaleString(),
-                    itemDetails: {
-                        itemName: "Trimmer",
-                        metadata: {
-                            brand: "Phillips",
-                            postCreated: "",
-                            lenderId: "201198xxxx",
-                        },
-                        desc: "Lorem ipsum",
-                        imgUrl: "",
-                        price: 10,
-                        estValue: 100,
-                    }
-                },
-                {
-                    orderId: "cuhp20xx",
-                    itemId: "123",
-                    borrowerId: "2011981xxxx",
-                    lenderId: "",
-                    transactionAmount: 15,
-                    dateOfTransaction: new Date().toLocaleString(),
-                    itemDetails: {
-                        itemName: "Kettle",
-                        metadata: {
-                            brand: "Omega",
-                            postCreated: "",
-                            lenderId: "201198xxxx",
-                        },
-                        desc: "Lorem ipsum",
-                        imgUrl: "",
-                        price: 15,
-                        estValue: 1000,
-                    }
-                },
-                {
-                    orderId: "cuhp20xx",
-                    itemId: "123",
-                    borrowerId: "2011981xxxx",
-                    lenderId: "",
-                    transactionAmount: 8,
-                    dateOfTransaction: new Date().toLocaleString(),
-                    itemDetails: {
-                        itemName: "Iron",
-                        metadata: {
-                            brand: "Bajaj",
-                            postCreated: "",
-                            lenderId: "201198xxxx",
-                        },
-                        desc: "Lorem ipsum",
-                        imgUrl: "",
-                        price: 8,
-                        estValue: 100,
-                    }
-                }
-            ])
-        }, 5000);
+    async function saveUserAd(adData) {
+        try {
+            const { data } = await axios.post("/user/createad", adData)
+            return data
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     useEffect(() => {
@@ -225,9 +159,8 @@ export function AuthProvider({ children }) {
         signup,
         logout,
         getUserData,
-        userOrders,
-        getUserOrders,
-        updateProfie
+        updateProfie,
+        saveUserAd
     }
     return (
         <AuthContext.Provider value={value}>
