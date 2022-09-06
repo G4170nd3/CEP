@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const authRoutes = require("./routes/auth")
+const otpVerification = require("./routes/otp")
 
 const app = express();
 
@@ -14,6 +15,7 @@ app.use(cors());
 // 550 - login succesful
 
 app.use("/api", authRoutes)
+app.use("/otp", otpVerification)
 
 app.listen(3001, () => {
     console.log("running srverrrrrr");
