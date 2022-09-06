@@ -5,10 +5,15 @@ const bcrypt = require("bcrypt")
 const router = Router();
 
 const db = mysql.createConnection({
-    user: "root",
-    host: "localhost",
-    password: "password",
-    database: "cep",
+    user: "agytYNOlUB",
+    host: "remotemysql.com",
+    password: "FA5BTMxjBs",
+    database: "agytYNOlUB",
+    
+    // user: "root",
+    // host: "localhost",
+    // password: "admin",
+    // database: "cep",
 });
 
 router.post("/register", (request, response) => {

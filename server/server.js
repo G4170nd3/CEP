@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const authRoutes = require("./routes/auth")
+const userRoutes = require("./routes/users")
 const otpVerification = require("./routes/otp")
 
 const app = express();
@@ -15,6 +16,7 @@ app.use(cors());
 // 550 - login succesful
 
 app.use("/api", authRoutes)
+app.use("/api/user", userRoutes)
 app.use("/otp", otpVerification)
 
 app.listen(3001, () => {
