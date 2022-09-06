@@ -3,7 +3,6 @@ const mysql = require("mysql");
 const bcrypt = require("bcrypt")
 
 const router = Router();
-//fuck you akarsh
 
 const db = mysql.createConnection({
     user: "root",
