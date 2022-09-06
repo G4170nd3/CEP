@@ -6,9 +6,6 @@ import { AuthProvider } from './context/AuthContext';
 import Navbar from './layout/Navbar';
 import Login from './pages/AuthUserGateway';
 import Dashboard from './pages/Dashboard';
-import ViewOrders from './pages/ViewOrders';
-import Lend from './pages/Lend';
-import Borrow from './pages/Borrow';
 
 function App() {
   const [isLoading, setLoading] = useState(true);
