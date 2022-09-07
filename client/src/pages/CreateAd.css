@@ -1,0 +1,88 @@
+.tab-data-container {
+    padding: 10px;
+    display: flex;
+    min-height: 276px;
+    background: rgb(249, 217, 118);
+    background: -moz-linear-gradient(124deg, rgba(249, 217, 118, 1) 0%, rgba(243, 159, 134, 1) 100%);
+    background: -webkit-linear-gradient(124deg, rgba(249, 217, 118, 1) 0%, rgba(243, 159, 134, 1) 100%);
+    background: linear-gradient(124deg, rgba(249, 217, 118, 1) 0%, rgba(243, 159, 134, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#f9d976", endColorstr="#f39f86", GradientType=1);
+}
+
+.tab-data-container .flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.tab-data-container .flex-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.create-ad-product-img {
+    height: 276px;
+    border: 2px solid gray;
+    padding: 2px;
+    margin-left: 10px;
+}
+
+input, textarea, select {
+    width: 250px;
+    height: fit-content;
+    padding: 6px 12px;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: sans-serif;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    appearance: none;
+    border-radius: 4px;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    margin: 10px;
+}
+
+input:focus, textarea:focus {
+    color: #212529;
+    background-color: #fff;
+    border-color: #86b7fe;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 25%);
+}
+
+.user-form-actions-container {
+    display: flex;
+    margin: 10px;
+}
+
+.post-ad-form-action-btn {
+    margin: 10px;
+    width: 48px;
+    height: 48px;
+    background-color: #fff;
+    border-radius: 48px;
+    border: 3px solid #f2af29;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.post-ad-form-action-btn::after {
+    font-size: 18px;
+    color: #f2af29;
+    transition: all 0.3s ease;
+}
+
+.post-ad-form-action-btn:hover {
+    border-color: var(--c2);
+}
+
+.post-ad-form-action-btn:hover::after {
+    color: var(--c2);
+}
