@@ -55,10 +55,12 @@ function Login() {
         e.preventDefault()
         if (userInput.email == "" || userInput.email == undefined) {
             alert("Invalid email")
+            setLoading(false)
             return
         }
         if (userInput.password == "" || userInput.password == undefined) {
             alert("Invalid password")
+            setLoading(false)
             return
         }
         // console.log(userInput.email, userInput.password)
@@ -67,7 +69,6 @@ function Login() {
             setLoading(false)
         } catch (error) {
             setLoading(false)
-            document.getElementById("message").innerHTML = error.message
         }
     }
 
@@ -96,7 +97,6 @@ function Login() {
             </Helmet>
             <div className='page-container auth-user-gateway-container'>
                 <div className="container" id="container">
-                    <p id="message"></p>
                     <div className="form-container sign-up-container">
                         <form onSubmit={handleSignup}>
                             <h1>Create Account</h1>

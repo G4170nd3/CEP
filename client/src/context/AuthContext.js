@@ -134,7 +134,7 @@ export function AuthProvider({ children }) {
                 userEmail: email 
             })
             console.log(data);
-            setUserData(data);
+            setUserData(data.data[0]);
         } catch (error) {
             console.error(error);
         }

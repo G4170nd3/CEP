@@ -8,15 +8,10 @@ import CreateAd from './CreateAd'
 import ContentLoader from "react-content-loader"
 
 function Dashboard() {
-    const { userData, getUserData } = useAuth()
+    const { userData } = useAuth()
     const [verifyModal, toggleVerifyModal] = useState(false)
     const [userAction, setUserAction] = useState()
     const navigate = useNavigate()
-
-    useEffect(() => {
-        getUserData()
-    }, [])
-
 
     useEffect(() => {
         const pathName = window.location.pathname
