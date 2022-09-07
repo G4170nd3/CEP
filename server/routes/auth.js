@@ -31,7 +31,7 @@ router.post("/register", (request, response) => {
                     db.query("select * from users",
                     (error1, result1) => {
                         if (error1) console.log(error1);
-                        db.query("insert into users(userId,name,password,email) values(?,?,?,?)",
+                        db.query("insert into users(userId,name,password,email,isComplete) values(?,?,?,?,false)",
                         [result1.length + 1, name, password, email],
                         (err) => {
                             if (err) console.log(err);
