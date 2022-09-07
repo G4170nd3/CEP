@@ -16,6 +16,9 @@ app.use(cors());
 // 550 - login succesful
 // 404 - user not found while fetching data
 // 300 - user ofund while fetching data
+// 403 - unauthorized access (no email for the token found)
+// 440 - token found and sent
+
 
 app.use("/api", authRoutes)
 app.use("/api/user", userRoutes)
