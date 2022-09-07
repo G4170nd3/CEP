@@ -14,6 +14,8 @@ app.use(cors());
 // 501 - same email while reg
 // 502 - login info doesn't match any records
 // 550 - login succesful
+// 404 - user not found while fetching data
+// 300 - user ofund while fetching data
 
 app.use("/api", authRoutes)
 app.use("/api/user", userRoutes)
