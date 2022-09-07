@@ -130,8 +130,11 @@ export function AuthProvider({ children }) {
 
     async function getUserData(email) {
         try {
-            const { data } = await axios.post("/api/user/details", { userEmail: email })
-            setUserData(data)
+            const { data } = await axios.post("/api/user/details",{ 
+                userEmail: email 
+            })
+            console.log(data);
+            setUserData(data);
         } catch (error) {
             console.error(error);
         }
