@@ -1,3 +1,4 @@
+const refreshToken = require('../util/tokenFunctions.js');
 const { Router, response } = require("express")
 const mysql = require("mysql");
 const bcrypt = require("bcrypt")
@@ -19,7 +20,6 @@ router.post("/register", (request, response) => {
     const name = request.body.regName;
     const password = request.body.regPassword;
     const email = request.body.regEmail;
-    const refToken = request.body.refreshToken;
     try{
         db.query("select * from users where email=?",
         [email],
@@ -31,13 +31,14 @@ router.post("/register", (request, response) => {
                     db.query("select * from users",
                     (error1, result1) => {
                         if (error1) console.log(error1);
-                        db.query("insert into users(userId,name,password,email) values(?,?,?,?)",
+                        db.query("insert into users(userId,name,password,email,isComplete) values(?,?,?,?,false)",
                         [result1.length + 1, name, password, email],
                         (err) => {
                             if (err) console.log(err);
                             else {
+                                const reftoken = refreshToken(email);
                                 db.query("insert into refreshToken values(?,?)",
-                                [email,refToken],
+                                [email,reftoken],
                                 (error)=>{
                                     if(error) throw error;
                                 });
@@ -85,7 +86,6 @@ router.post("/checkToken",(request,response)=>{
 router.post("/login", (request, response) => {
     const email = request.body.loginEmail;
     const password = request.body.loginPassword;
-    const refToken = request.body.refreshToken;
     console.log(email, password);
     // console.log(email, password);
     // db query to fetch login info
@@ -98,19 +98,20 @@ router.post("/login", (request, response) => {
                 console.log(error);
             }
             else if (result.length > 0) {
+                const reftoken = refreshToken(email);
                 db.query("select * from refreshToken where email=?",
                 [email],
                 (error, result)=>{
                     if(error) throw error;
                     if(result.length==0){
                         db.query("insert into refreshToken values(?,?)",
-                        [email,refToken],
+                        [email,reftoken],
                         (error)=>{
                             if(error) throw error;
                         });
                     } else {
                         db.query("update refreshToken set refreshToken=? where email=?",
-                        [refToken,email],
+                        [reftoken,email],
                         (error, result)=>{
                             if(error) throw error;
                         });
