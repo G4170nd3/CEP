@@ -1,0 +1,29 @@
+.view-items-page {
+    width: 100%;
+    background-color: var(--c2);
+    color: var(--c1);
+    border-radius: 12px;
+}
+
+.item-cards-container {
+    width: calc(100% - 40px);
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.item-card {
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    width: 280px;
+    padding: 15px;
+    margin: 15px;
+    border-radius: 12px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+}
+
+.item-card img {
+    width: 100%;
+}

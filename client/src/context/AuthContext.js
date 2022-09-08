@@ -13,14 +13,36 @@ export function useAuth() {
 export function AuthProvider({ children }) {
     const [currentUser, setCurrentUser] = useState()
     const [userData, setUserData] = useState()
-    const [inventory, setInventory] = useState({
+    const [inventory, setInventory] = useState([{
+        img: `https://m.media-amazon.com/images/W/WEBP_402378-T1/images/I/41bcsEUR+7L._SL1000_.jpg`,
         name: "Trimmer",
         metadata: {
             brand: "Phillips",
         },
+        desc: "This is a trimmer lol",
         price: 10,
         estValue: 100,
-    })
+    },
+    {
+        img: `https://m.media-amazon.com/images/W/WEBP_402378-T1/images/I/41bcsEUR+7L._SL1000_.jpg`,
+        name: "Trimmer",
+        metadata: {
+            brand: "Phillips",
+        },
+        desc: "This is a trimmer lol",
+        price: 10,
+        estValue: 100,
+    },
+    {
+        img: `https://m.media-amazon.com/images/W/WEBP_402378-T1/images/I/41bcsEUR+7L._SL1000_.jpg`,
+        name: "Trimmer",
+        metadata: {
+            brand: "Phillips",
+        },
+        desc: "This is a trimmer lol",
+        price: 10,
+        estValue: 100,
+    }])
     const [userNotifications, setNotifications] = useState([])
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
@@ -130,8 +152,8 @@ export function AuthProvider({ children }) {
 
     async function getUserData(email) {
         try {
-            const { data } = await axios.post("/api/user/details",{ 
-                userEmail: email 
+            const { data } = await axios.post("/api/user/details", {
+                userEmail: email
             })
             console.log(data);
             setUserData(data.data[0]);
@@ -163,7 +185,8 @@ export function AuthProvider({ children }) {
         logout,
         getUserData,
         updateProfie,
-        saveUserAd
+        saveUserAd,
+        inventory
     }
     return (
         <AuthContext.Provider value={value}>

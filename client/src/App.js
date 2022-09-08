@@ -16,7 +16,8 @@ function App() {
       <AuthProvider>
         <Navbar />
         <Routes>
-          <Route exact path="/" element={<Login />} />
+          <Route exact path="/" element={<Home />} />
+          <Route exact path="/Login" element={<Login />} />
           <Route exact path="/dashboard" element={<Dashboard />} />
           <Route exact path="/vieworders" element={<Dashboard />} />
           <Route exact path="/lend" element={<Dashboard />} />
