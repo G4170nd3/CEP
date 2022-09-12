@@ -5,14 +5,14 @@ const router = Router();
 let db
 try {
     db = mysql.createConnection({
-        user: "agytYNOlUB",
-        host: "remotemysql.com",
-        password: "FA5BTMxjBs",
-        database: "agytYNOlUB",
-        // user: "root",
-        // host: "localhost",
-        // password: "password",
-        // database: "cep",
+        // user: "agytYNOlUB",
+        // host: "remotemysql.com",
+        // password: "FA5BTMxjBs",
+        // database: "agytYNOlUB",
+        user: "root",
+        host: "localhost",
+        password: "password",
+        database: "cep",
     });
 } catch (error) {
     console.log(error)
