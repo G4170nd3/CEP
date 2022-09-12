@@ -17,7 +17,7 @@ function CreateAd() {
   const [formCurrentTab, setFormCurrentTab] = useState(0)
   const [adValid, setAdValid] = useState(false)
   const [inputAdData, setInputAdData] = useState()
-  const [userProductImg, setUserProductImg] = useState(false)
+  const [userProductImg, setUserProductImg] = useState("/")
   const { saveUserAd } = useAuth()
 
   function nextFormTab() {
@@ -87,36 +87,20 @@ function CreateAd() {
             <div className='flex-col'>
               <input name="name" type='text' placeholder='Name of product' onChange={inputHandler} />
               <textarea name='desc' placeholder='Description' type='text' onChange={inputHandler}></textarea>
+              <input name='cost' placeholder='Cost' type='number' onChange={inputHandler} />
+              <select name='costBy' defaultValue={"Per Hour"} onChange={inputHandler}>
+                <option value="hour">Cost Per Hour</option>
+                <option value="day">Cost Per Day</option>
+                <option value="usage">Cost Per Usage</option>
+              </select>
               <input name='img' placeholder='Image' type='file' onChange={inputHandler} />
             </div>
             <div className='flex-col'>
-              <img src={userProductImg} hidden={!userProductImg} className='create-ad-product-img' alt="" />
+              <img src={userProductImg} hidden={userProductImg === "/"} className='create-ad-product-img' alt="" />
             </div>
           </div>
           <div className="user-form-actions-container">
             <button className='post-ad-form-action-btn' onClick={prevFormTab} disabled={true}>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-caret-left-fill" viewBox="0 0 16 16">
-                <path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
-              </svg>
-            </button>
-            <button className='post-ad-form-action-btn' onClick={nextFormTab}>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-caret-right-fill" viewBox="0 0 16 16">
-                <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
-              </svg>
-            </button>
-          </div>
-        </Tab>
-        <Tab title="Payment" className="tabs">
-          <div className="tab-data-container">
-            <input name='cost' placeholder='Cost' type='number' onChange={inputHandler} /><br />
-            <select name='costBy' defaultValue={"Per Hour"} onChange={inputHandler}>
-              <option value="hour">Per Hour</option>
-              <option value="day">Per Day</option>
-              <option value="usage">Per Usage</option>
-            </select>
-          </div>
-          <div className="user-form-actions-container">
-            <button className='post-ad-form-action-btn' onClick={prevFormTab}>
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-caret-left-fill" viewBox="0 0 16 16">
                 <path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
               </svg>

@@ -21,7 +21,7 @@ function Home() {
         </div>
       </div>
       <div className="ads-wrapper-home">
-        <ViewAds items={inventory} />
+        <ViewAds enableDetails={true} items={inventory} />
       </div>
     </div>
   )

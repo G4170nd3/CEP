@@ -19,9 +19,10 @@ function App() {
           <Route exact path="/" element={<Home />} />
           <Route exact path="/Login" element={<Login />} />
           <Route exact path="/dashboard" element={<Dashboard />} />
-          <Route exact path="/vieworders" element={<Dashboard />} />
-          <Route exact path="/lend" element={<Dashboard />} />
-          <Route exact path="/borrow" element={<Dashboard />} />
+          <Route exact path="/create" element={<Dashboard />} />
+          <Route exact path="/post" element={<Dashboard />} />
+          <Route exact path="/viewcreated" element={<Dashboard />} />
+          <Route exact path="/viewposted" element={<Dashboard />} />
           {/* <Route path='/404' element={<NotFound />}></Route> */}
           {/* <Route element={<NotFound />}></Route> */}
         </Routes>

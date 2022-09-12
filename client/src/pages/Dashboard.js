@@ -5,6 +5,9 @@ import { useAuth } from '../context/AuthContext'
 import './Dashboard.css'
 import ProfileSection from '../layout/ProfileSection'
 import CreateAd from './CreateAd'
+import PostAd from './PostAd'
+import ViewPostedAds from './ViewPostedAds'
+import ViewCreatedAds from './ViewCreatedAds'
 import ContentLoader from "react-content-loader"
 
 function Dashboard() {
@@ -16,7 +19,7 @@ function Dashboard() {
     useEffect(() => {
         const pathName = window.location.pathname
         if (pathName === "/dashboard")
-            setUserAction("lend")
+            setUserAction("create")
         else
             setUserAction(pathName.split("/")[1])
     }, [userAction, window.location.pathname])
@@ -58,8 +61,17 @@ function Dashboard() {
 
                 }
                 <div className="action-container">
-                    {userAction === "lend" ?
+                    {userAction === "create" ?
                         <CreateAd userData={userData} />
+                        : <></>}
+                    {userAction === "post" ?
+                        <PostAd userData={userData} />
+                        : <></>}
+                    {userAction === "viewcreated" ?
+                        <ViewCreatedAds userData={userData} />
+                        : <></>}
+                    {userAction === "viewposted" ?
+                        <ViewPostedAds userData={userData} />
                         : <></>}
                 </div>
             </div>

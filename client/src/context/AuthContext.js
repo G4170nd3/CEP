@@ -83,8 +83,7 @@ export function AuthProvider({ children }) {
                 //success
                 console.log(data);
                 navigate("/dashboard")
-                Cookies.set("user", MD5(data.data[0].email + Date.now()), { expires: 1 })
-                setCurrentUser(Cookies.get("user"))
+                setCurrentUser(Cookies.get("token"))
                 getUserData(data.data[0].email)
                 return;
             } else if (data.statusCode == 502) {
@@ -107,7 +106,7 @@ export function AuthProvider({ children }) {
             if (data.statusCode == 550) {
                 //success
                 navigate("/")
-                Cookies.remove("user")
+                Cookies.remove("token")
                 setCurrentUser(null)
                 return;
             } else if (data.statusCode == 502) {
@@ -117,6 +116,28 @@ export function AuthProvider({ children }) {
             }
         } catch (error) {
             throw error
+        }
+    }
+
+    async function sendOtp() {
+        try {
+            const { data } = await axios.post("/otp/send", { vemail: userData.email })
+            alert(data.message)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async function verifyOtp(otp) {
+        try {
+            const { data } = await axios.post("/otp/verify", { otpVal: otp, vemail: userData.email })
+            if (data.status === false) {
+                alert(data.message)
+                return false
+            }
+            else return true
+        } catch (error) {
+            console.log(error);
         }
     }
 
@@ -155,7 +176,6 @@ export function AuthProvider({ children }) {
             const { data } = await axios.post("/api/user/details", {
                 userEmail: email
             })
-            console.log(data);
             setUserData(data.data[0]);
         } catch (error) {
             console.error(error);
@@ -164,15 +184,34 @@ export function AuthProvider({ children }) {
 
     async function saveUserAd(adData) {
         try {
-            const { data } = await axios.post("/user/createad", adData)
+            const { data } = await axios.post("/user/ad/create", adData)
             return data
         } catch (error) {
             console.error(error);
         }
     }
 
+    async function checkToken(token) {
+        try {
+            const { data } = await axios.post("/api/checkToken", { refreshToken: token })
+            if (data.statusCode == 440) {
+                getUserData(data.data)
+                setCurrentUser(data.data)
+                navigate("/dashboard")
+            } else {
+                logout()
+                navigate("/login")
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     useEffect(() => {
-        setCurrentUser(Cookies.get("user"))
+        console.log(Cookies.get("token"));
+        if (Cookies.get("token")) {
+            checkToken(Cookies.get("token"))
+        }
     }, [currentUser])
 
 
@@ -186,7 +225,9 @@ export function AuthProvider({ children }) {
         getUserData,
         updateProfie,
         saveUserAd,
-        inventory
+        inventory,
+        sendOtp,
+        verifyOtp
     }
     return (
         <AuthContext.Provider value={value}>

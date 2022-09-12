@@ -100,6 +100,7 @@
     padding: 8px;
     cursor: pointer;
     margin-top: -10px;
+    margin-right: 10px;
     -webkit-transition: ease-in-out 300ms;
     -moz-transition: ease-in-out 300ms;
     transition: ease-in-out 300ms;

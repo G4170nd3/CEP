@@ -6,14 +6,14 @@ const nodemailer = require("nodemailer");
 const router = Router();
 
 const db = mysql.createConnection({
-    // user: "agytYNOlUB",
-    // host: "remotemysql.com",
-    // password: "FA5BTMxjBs",
-    // database: "agytYNOlUB",
-    user: "root",
-    host: "localhost",
-    password: "password",
-    database: "cep",
+    user: "agytYNOlUB",
+    host: "remotemysql.com",
+    password: "FA5BTMxjBs",
+    database: "agytYNOlUB",
+    // user: "root",
+    // host: "localhost",
+    // password: "password",
+    // database: "cep",
 });
 
 const smtpTransport = nodemailer.createTransport({

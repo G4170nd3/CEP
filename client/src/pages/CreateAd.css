@@ -28,7 +28,7 @@
     margin-left: 10px;
 }
 
-input, textarea, select {
+.tab-data-container input, .tab-data-container textarea, .tab-data-container select {
     width: 250px;
     height: fit-content;
     padding: 6px 12px;
@@ -46,7 +46,7 @@ input, textarea, select {
     margin: 10px;
 }
 
-input:focus, textarea:focus {
+.tab-data-container input:focus, .tab-data-container textarea:focus {
     color: #212529;
     background-color: #fff;
     border-color: #86b7fe;

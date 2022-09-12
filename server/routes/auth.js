@@ -18,7 +18,7 @@ try {
         // database: "cep",
     });
 } catch (error) {
-    console.log(error)
+    console.log(error.message)
 }
 
 router.post("/register", (request, response) => {
@@ -65,7 +65,6 @@ router.post("/register", (request, response) => {
     // (error,result)=>{
     //     console.log(error);
     // });
-
 });
 
 router.post("/checkToken",(request,response)=>{
@@ -122,6 +121,8 @@ router.post("/login", (request, response) => {
                         });
                     }
                 });
+                response.cookie("token", reftoken)
+                console.log(reftoken);
                 response.send({statusCode: 550, message: "Login succesful.", data: result});
             } else {
                 response.send({ statusCode: 502, message: "Login info doesn't match any records." });

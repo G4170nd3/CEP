@@ -99,10 +99,11 @@ function Navbar() {
       </div>
       <ul className={screenWidth > 665 ? "nav-tabs-container" : "nav-tabs-container-mobile"}>
         <li id="close-mobile-menu" onClick={closeMobileMenu}>X</li>
-        <li className="nav-tab nav-tab-hover" onClick={() => { navigate("/") }}>Home</li>
+        <li className="nav-tab nav-tab-hover" onClick={() => { navigate("/") }}>Posted Ads</li>
         {/* <li className="nav-tab nav-tab-hover">Products</li> */}
-        <li className="nav-tab nav-tab-hover">About</li> 
-        <li className="nav-tab-btn nav-tab-btn-hover" onClick={userData ? logout : ()=>{navigate("/login")}}>{currentUser ? loading ? <>Loading...</> : userData ? `${userData.name}` : "" : "Login"}</li>
+        <li className="nav-tab nav-tab-hover">About</li>
+        {currentUser ? loading ? <>Loading...</> : <li className='nav-tab-btn nav-tab-btn-hover' onClick={() => navigate("/dashboard")}>Dashboard</li> : <></>}
+        <li className="nav-tab-btn nav-tab-btn-hover" onClick={currentUser ? logout : () => { navigate("/login") }}>{currentUser ? loading ? <>Loading...</> : userData ? "Logout" : "" : "Login"}</li>
       </ul>
     </div >
   )
