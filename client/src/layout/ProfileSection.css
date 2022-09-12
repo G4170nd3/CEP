@@ -94,6 +94,8 @@
     align-items: center;
     margin-top: -80px;
     padding: 50px;
+    top: 80px;
+    left: 0px;
 }
 
 .modal-overlay {

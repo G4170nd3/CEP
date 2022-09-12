@@ -37,6 +37,18 @@
 
 
 /* CSS */
+.button-82-pushable:disabled .button-82-front {
+    background-color: rgb(205, 205, 205);
+}
+
+.button-82-pushable:disabled .button-82-edge {
+    background: linear-gradient(to left,
+            hsl(0, 0%, 36%) 0%,
+            hsl(0, 0%, 47%) 8%,
+            hsl(0, 0%, 66%) 92%,
+            hsl(0, 0%, 75%) 100%);
+}
+
 .button-82-pushable {
     position: relative;
     border: none;

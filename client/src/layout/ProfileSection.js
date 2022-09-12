@@ -16,20 +16,23 @@ function ProfileSection(props) {
     const [editProfileInput, setEditProfileInput] = useState()
     const [disableOtpReq, setDisableOtpReq] = useState(false)
     const [isDayScholar, setDayScholar] = useState(false)
-    const { updateProfie } = useAuth()
-    //props.userData.dpUrl = `https://www.gravatar.com/avatar/${MD5(props.userData.email)}?d=wavatar&s=1000&r=x`;
+    const [canProceed, setCanProceed] = useState(false)
+    const { updateProfie, sendOtp, verifyOtp } = useAuth()
 
-    useEffect(() => {
-        props.userData.dpUrl = `https://www.gravatar.com/avatar/${MD5(props.userData.email)}?d=wavatar&s=10&r=x`
-        console.log(props.userData.dpUrl);
-    }, [])
-
-    function lend() {
-        navigate("/lend")
+    function createad() {
+        navigate("/create")
     }
 
-    function borrow() {
-        navigate("/borrow")
+    function postad() {
+        navigate("/post")
+    }
+
+    function adscreated() {
+        navigate("/viewcreated")
+    }
+
+    function adsposted() {
+        navigate("/viewposted")
     }
 
     async function handleProfileEditSubmit(e) {
@@ -45,7 +48,17 @@ function ProfileSection(props) {
 
     async function handleOtpRequest(e) {    //gotta add the onclick send otp
         e.preventDefault()
-        setDisableOtpReq(true)
+        // setDisableOtpReq(true)
+        sendOtp()
+        // setTimeout(() => {
+        //     setDisableOtpReq(false)
+        // }, 60000);
+    }
+
+    async function sendOtpVerification(e) {
+        if (String(e.target.value).length === 5) {
+            setCanProceed(await verifyOtp(e.target.value))
+        }
     }
 
     const handleEditProfileInput = (event) => {
@@ -168,13 +181,13 @@ function ProfileSection(props) {
                                                     <label htmlFor="otp">OTP: </label>
                                                 </td>
                                                 <td>
-                                                    <input type="number" name='otp' onChange={handleEditProfileInput} required={true} />
+                                                    <input type="number" name='otp' onChange={(e) => { handleEditProfileInput(e); sendOtpVerification(e) }} required={true} />
                                                 </td>
                                             </tr>
                                         }
                                         <tr>
                                             <td colSpan={2}>
-                                                <button className="button-82-pushable" role="button" type='submit' form='ep-form'>
+                                                <button className="button-82-pushable" role="button" type='submit' form='ep-form' disabled={!canProceed}>
                                                     <span className="button-82-shadow"></span>
                                                     <span className="button-82-edge"></span>
                                                     <span className="button-82-front text">
@@ -247,18 +260,25 @@ function ProfileSection(props) {
                     </div>
                 </div>
                 <div className="user-profile-actions">
-                    <button className="button-82-pushable" role="button" onClick={lend}>
-                        <span className="button-82-shadow"></span>
-                        <span className="button-82-edge"></span>
-                        <span className="button-82-front text">
-                            Post Ad
-                        </span>
-                    </button>
-                    <button className="button-82-pushable" role="button" onClick={lend}>
+                    <button className="button-82-pushable" role="button" onClick={createad}>
                         <span className="button-82-shadow"></span>
                         <span className="button-82-edge"></span>
                         <span className="button-82-front text">
                             Create Ad
+                        </span>
+                    </button>
+                    <button className="button-82-pushable" role="button" onClick={adscreated}>
+                        <span className="button-82-shadow"></span>
+                        <span className="button-82-edge"></span>
+                        <span className="button-82-front text">
+                            View Created Ads
+                        </span>
+                    </button>
+                    <button className="button-82-pushable" role="button" onClick={adsposted}>
+                        <span className="button-82-shadow"></span>
+                        <span className="button-82-edge"></span>
+                        <span className="button-82-front text">
+                            View Posted Ads
                         </span>
                     </button>
                 </div>

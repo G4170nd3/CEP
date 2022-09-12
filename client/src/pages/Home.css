@@ -1,0 +1,18 @@
+.inventory-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    width: calc(100% - 40px);
+    padding: 0px 20px;
+    background-color: gray;
+    color: var(--c3);
+}
+
+.ads-wrapper-home {
+    width: calc(100% - 20px);
+    min-height: 100vh;
+    background-color: gray;
+    padding: 0px 10px;
+}
