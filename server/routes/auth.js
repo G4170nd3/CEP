@@ -22,6 +22,23 @@ try {
 }
 
 router.post("/register", (request, response) => {
+    // const userObj = {
+    //     userId: null,
+    //     email: request.body.regEmail,
+    //     name: request.body.regName,
+    //     username: null,
+    //     rollNum: null,
+    //     phoneNum: null,
+    //     campus: null,
+    //     branch: null,
+    //     batch: null,
+    //     hostel: null,
+    //     roomNum: null,
+    //     password: request.body.regPassword,
+    //     isVerified: false,
+    //     isComplete: false,
+    //     isHosteller: null
+    // }
     const name = request.body.regName;
     const password = request.body.regPassword;
     const email = request.body.regEmail;
@@ -47,7 +64,8 @@ router.post("/register", (request, response) => {
                                 (error)=>{
                                     if(error) throw error;
                                 });
-                                response.send({ statusCode: 500, message: "Register Succesful and token noted", data: result1 });
+                                response.cookie("token",reftoken);
+                                response.send({statusCode: 500, message: "Register Succesful and token noted", data:{email:email, token:reftoken}});
                             }
                         });
                     });
@@ -60,11 +78,6 @@ router.post("/register", (request, response) => {
         throw error;
     }
 
-    // db.query("insert into regdetails(name,password,email) values(?,?,?)",
-    // [name,password,email],
-    // (error,result)=>{
-    //     console.log(error);
-    // });
 });
 
 router.post("/checkToken",(request,response)=>{
@@ -76,9 +89,9 @@ router.post("/checkToken",(request,response)=>{
             if(error) throw error;
             else{
                 if(result.length==0){
-                    response.send({statusCode:403, message: "unauthorized access"});
+                    response.send({statusCode:502, message: "unauthorized access"});
                 } else {
-                    response.send({statusCode:440, message: "token valid, verified!", data:result[0].email});
+                    response.send({statusCode:503, message: "token valid, verified!", data:result[0].email});
                 }
             }
         });
@@ -121,11 +134,10 @@ router.post("/login", (request, response) => {
                         });
                     }
                 });
-                response.cookie("token", reftoken)
-                console.log(reftoken);
-                response.send({statusCode: 550, message: "Login succesful.", data: result});
+                response.cookie("token",reftoken);
+                response.send({statusCode: 504, message: "Login succesful.", data:result[0], token:reftoken});
             } else {
-                response.send({ statusCode: 502, message: "Login info doesn't match any records." });
+                response.send({ statusCode: 505, message: "Login info doesn't match any records." });
             }
         });
     } catch (error){
