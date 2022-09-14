@@ -16,7 +16,7 @@ function CreateAd() {
 
   const [formCurrentTab, setFormCurrentTab] = useState(0)
   const [adValid, setAdValid] = useState(false)
-  const [inputAdData, setInputAdData] = useState()
+  const [inputAdData, setInputAdData] = useState({})
   const [userProductImg, setUserProductImg] = useState("/")
   const { saveUserAd } = useAuth()
 
@@ -72,6 +72,7 @@ function CreateAd() {
   //send created ad object to /users/createad
   function createAdObject() {
     try {
+      if((inputAdData.name == undefined || inputAdData.name == "") || (inputAdData.desc == undefined || inputAdData.desc == "") || (inputAdData.cost == undefined || inputAdData.cost <= 0) || (inputAdData.costBy == undefined || inputAdData.costBy == "")) throw Error("Please fill all the fields correctly.")
       saveUserAd(inputAdData)
     } catch (error) {
       console.error(error);
@@ -88,7 +89,8 @@ function CreateAd() {
               <input name="name" type='text' placeholder='Name of product' onChange={inputHandler} />
               <textarea name='desc' placeholder='Description' type='text' onChange={inputHandler}></textarea>
               <input name='cost' placeholder='Cost' type='number' onChange={inputHandler} />
-              <select name='costBy' defaultValue={"Per Hour"} onChange={inputHandler}>
+              <select name='costBy' defaultValue={"none"} onChange={inputHandler}>
+                <option value="none" disabled={true}>Select Cost Type</option>
                 <option value="hour">Cost Per Hour</option>
                 <option value="day">Cost Per Day</option>
                 <option value="usage">Cost Per Usage</option>

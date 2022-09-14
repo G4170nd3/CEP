@@ -90,7 +90,7 @@
 }
 
 .nav-tab-hover-dark:hover {
-    border-bottom: 4px solid var(--c1);
+    border-bottom: 4px solid var(--c3);
 }
 
 .nav-tab-btn {
@@ -113,8 +113,8 @@
 }
 
 .nav-tab-btn-hover-dark:hover {
-    background-color: var(--b3);
-    color: var(--f1);
+    background-color: var(--c3);
+    color: var(--c1);
 }
 
 .nav-icon-container {
@@ -171,6 +171,12 @@
 }
 
 @media screen and (max-width: 665px) {
+    .nav-tabs-container {
+        display: none;
+    }
+    .nav-tabs-container-mobile {
+        display: block;
+    }
     .nav-icon-container {
         display: flex;
     }
