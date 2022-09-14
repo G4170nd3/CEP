@@ -11,10 +11,19 @@ import ViewCreatedAds from './ViewCreatedAds'
 import ContentLoader from "react-content-loader"
 
 function Dashboard() {
-    const { userData } = useAuth()
+    const { userData, getUserData, currentUser } = useAuth()
     const [verifyModal, toggleVerifyModal] = useState(false)
     const [userAction, setUserAction] = useState()
     const navigate = useNavigate()
+
+    useEffect(() => {
+      async function fetchData() {
+        await getUserData()
+      }
+      fetchData()
+      console.log(currentUser);
+    }, [])
+    
 
     useEffect(() => {
         const pathName = window.location.pathname
