@@ -19,6 +19,8 @@ app.use(cors());
 // 503 - token found and sent
 // 504 - login succesful
 // 505 - login info doesn't match any records
+// 506 - ref token not found in table
+// 507 - ref token record deleted
 
 // users.js: 400
 // 400 - user not found while fetching data

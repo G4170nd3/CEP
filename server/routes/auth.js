@@ -144,4 +144,27 @@ router.post("/login", (request, response) => {
         throw error;
     }
 });
+
+router.post("/logout", (request, response) => {
+    const reftoken = request.body.reftoken;
+    try{
+        db.query("select * from refreshtoken where refreshToken=?",
+        [reftoken],
+        (error, response)=>{
+            if(error) throw error;
+            else if(response.length==0) response.send({statusCode:506, message:"ref token not found in table"});
+            else {
+                db.query("delete from refreshtoken where refreshToken=?",
+                [reftoken],
+                (error)=>{
+                    if(error) throw error;
+                    else response.send({statusCode:507, message:"succesfully deleted!"});
+                })
+            }
+        })
+    } catch (error) {
+        throw error;
+    }
+});
+
 module.exports = router
