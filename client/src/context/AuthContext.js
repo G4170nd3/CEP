@@ -59,10 +59,8 @@ export function AuthProvider({ children }) {
             if (data.statusCode == 500) {
                 //success
                 console.log(data);
+                setCurrentUser(Cookies.get("token"))
                 navigate("/dashboard")
-                Cookies.set("user", MD5(data.data[0].email + Date.now()), { expires: 1 })
-                setCurrentUser(Cookies.get("user"))
-                return
             } else if (data.statusCode == 501) {
                 //email already exists
                 throw new Error(data.message);
@@ -79,20 +77,19 @@ export function AuthProvider({ children }) {
                 loginPassword: userInput.password,
             })
             console.log(data);
-            if (data.statusCode == 550) {
+            if (data.statusCode == 504) {
                 //success
                 console.log(data);
-                navigate("/dashboard")
                 setCurrentUser(Cookies.get("token"))
-                getUserData(data.data[0].email)
-                return;
-            } else if (data.statusCode == 502) {
+                setUserData(data.data)
+                navigate("/dashboard")
+            } else if (data.statusCode == 505) {
                 //wrong password
                 console.log(data);
                 throw new Error(data.message);
             }
         } catch (error) {
-            throw error
+            console.log(error)
         }
     }
 
@@ -156,12 +153,12 @@ export function AuthProvider({ children }) {
         try {
             const { data } = await axios.post("/api/user/update", profile)
             console.log(data);
-            if (data.statusCode == 550) {
+            if (data.statusCode == 403) {
                 //success
                 console.log(data);
                 navigate("/dashboard")
                 return;
-            } else if (data.statusCode == 502) {
+            } else if (data.statusCode == 402) {
                 //wrong password
                 console.log(data);
                 throw new Error(data.message);
@@ -171,33 +168,45 @@ export function AuthProvider({ children }) {
         }
     }
 
-    async function getUserData(email) {
+    async function getUserData() {
+        let email = await checkToken()
         try {
             const { data } = await axios.post("/api/user/details", {
                 userEmail: email
             })
-            setUserData(data.data[0]);
+            setUserData(data.data);
+            console.log(userData)
         } catch (error) {
             console.error(error);
         }
     }
 
     async function saveUserAd(adData) {
+        const adObj = {
+            email: userData.email,
+            adTitle: adData.name,
+            adDesc: adData.desc,
+            adPhoto: adData.img,
+            adPrice: adData.cost,
+            adPriceType: adData.costBy
+        }
         try {
-            const { data } = await axios.post("/user/ad/create", adData)
+            const { data } = await axios.post("/ads/post", adObj)
+            console.log(data);
             return data
         } catch (error) {
             console.error(error);
         }
     }
 
-    async function checkToken(token) {
+    async function checkToken() {
+        let token = Cookies.get("token")
         try {
             const { data } = await axios.post("/api/checkToken", { refreshToken: token })
-            if (data.statusCode == 440) {
-                getUserData(data.data)
+            if (data.statusCode == 503) {
                 setCurrentUser(data.data)
                 navigate("/dashboard")
+                return data.data
             } else {
                 logout()
                 navigate("/login")
@@ -209,7 +218,8 @@ export function AuthProvider({ children }) {
 
     useEffect(() => {
         console.log(Cookies.get("token"));
-        if (Cookies.get("token")) {
+        if (Cookies.get("token") != undefined || Cookies.get("token") != "undefined") {
+            console.log("Checking cookie");
             checkToken(Cookies.get("token"))
         }
     }, [currentUser])

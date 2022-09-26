@@ -7,7 +7,7 @@ const db = mysql.createConnection({
     // host: "remotemysql.com",
     // password: "FA5BTMxjBs",
     // database: "agytYNOlUB",
-    user: "root",
+    user: "test",
     host: "localhost",
     password: "password",
     database: "cep",
